@@ -1,0 +1,46 @@
+//Author: Hunter Taylor
+//Course: CPT187
+//Purpose: Program 6
+//Date: 12/06/19
+package cpt187.hunter.module6.participation;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+public class WriteOrder 
+{
+	private final int NOT_FOUND = -1;
+	//private final int RESET_VALUE = 0;
+	private String masterFileName = "";
+	private int recordCount = 0;
+	
+	public WriteOrder(String borrowedFileName)
+	{
+		masterFileName = borrowedFileName;
+	}
+	public void setWriteOrder(int borrowedItemId, String borrowedItemName, double borrowedItemPrice, int borrowedQuantity, double borrowedOrderCost)
+	{
+		try
+		{
+			PrintWriter filePW = new PrintWriter(new FileWriter(masterFileName, true));
+			filePW.printf("%d\t%s\t%f\t%d\t%f\r", borrowedItemId, borrowedItemName, borrowedItemPrice, borrowedQuantity, borrowedOrderCost);
+			recordCount++;
+			filePW.close();
+			
+		}
+		catch (IOException ex)
+		{
+			recordCount = NOT_FOUND;
+		}
+	}
+	public String getFileName()
+	{
+		return masterFileName;
+	}
+	public int getRecordCount()
+	{
+		return recordCount;
+	}
+
+}
